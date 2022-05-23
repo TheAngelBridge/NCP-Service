@@ -1,21 +1,25 @@
 
 // -- API Scope
 /**
- * @name ApiAuthKeyType
- * @alias NCPAuthKey
+ * `Authentication` for Naver Cloud Platform API
+ * 
+ * @name ApiAuthKey
+ * @member accessKey `string` private access key for account
+ * @member secretKey `string` private secret key for account
  */
- export type ApiAuthKeyType = {
+ export type ApiAuthKey = {
     accessKey: string
     secretKey: string
 }
 
 // -- Service Scope
 /**
- * @name SMSserviceAuthType
- * @memberof SMS
- * @alias SMSserviceAuth
+ * `Authentication` for SMS Service
+ * 
+ * @name SMSserviceAuth
+ * @member phone `string` 
  */
-export type SMSserviceAuthType = {
+export type SMSserviceAuth = {
     phone: string
     serviceId: string
 }
@@ -24,11 +28,13 @@ export type SMSserviceAuthType = {
 
 // -- API Signature Scope
 /**
- * @name ApiSignatureType
- * @memberof buildApiSignature
- * @alias ApiSignature
+ * `API Signature` for Naver Cloud Platform Services.
+ * 
+ * @name ApiSignature
+ * @member timestamp `string` timestamp
+ * @member signature `string` encrypted signature
  */
- export type ApiSignatureType = {
+ export type ApiSignature = {
     timestamp: string
     signature: string
 }
