@@ -11,8 +11,7 @@ import { ApiSignature, ApiAuthKey } from '../types/api.type';
  * @param {ApiAuthKey} authKey - NCP Account access key & secret key ( from portal or Sub Account )
  * 
  * @returns {ApiSignature}
- *         Caculated api signature for NCP services 
- *         Format : { Current_timestamp, Caculated_signature }
+ * Caculated api signature for NCP services. format: `ApiSignature`
  */
 export function buildApiSignature(
     method: string,
@@ -20,7 +19,6 @@ export function buildApiSignature(
     authKey: ApiAuthKey
 ): ApiSignature {
     const { accessKey, secretKey } = authKey    // from portal
-    const signParams: string[] = []
     const space = ' '   // one space
     const newLine = '\n'    // new line
     var timestamp = Date.now().toString()   // current timestamp (epoch)

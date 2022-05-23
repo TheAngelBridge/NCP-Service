@@ -17,14 +17,13 @@
  * `Authentication` for SMS Service
  * 
  * @name SMSserviceAuth
- * @member phone `string` 
+ * @member phone `string` registered phone number for sms service
+ * @member serviceId `string` service id for sms service
  */
 export type SMSserviceAuth = {
     phone: string
     serviceId: string
 }
-
-
 
 // -- API Signature Scope
 /**
