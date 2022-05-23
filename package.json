@@ -1,0 +1,34 @@
+{
+  "name": "ncp-client",
+  "version": "1.0.0",
+  "description": "easy-to-use Typescript client for Naver Cloud Platform Services",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "prebuild": "rm -rf dist",
+    "sample": "ts-node sample_app/app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheAngelBridge/NCP_Client.git"
+  },
+  "keywords": [
+    "NaverCloudPlatform"
+  ],
+  "author": "AlenHeo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheAngelBridge/NCP_Client/issues"
+  },
+  "homepage": "https://github.com/TheAngelBridge/NCP_Client#readme",
+  "devDependencies": {
+    "@types/jest": "^27.5.1",
+    "jest": "^28.1.0",
+    "ts-node": "^10.8.0",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
