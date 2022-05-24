@@ -7,7 +7,6 @@ export class ApiClient {
 
     private client: AxiosInstance
 
-
     constructor(
         baseUrl: string,
         timeout: number = 2000
@@ -65,6 +64,7 @@ export class ApiClient {
                 .catch((error) => {
                     if (axios.isAxiosError(error)) {
                         if (error.response) {
+                            console.log(error.response)
                             reject(new ApiError(ErrorCases.API.httpError))
                         } else if (error.request) {
                             reject(new ApiError(ErrorCases.API.noResponseFromServer))

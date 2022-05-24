@@ -8,7 +8,7 @@ const ApiURL = {
 
 export const BaseUrl = {
     SENS: {
-        SMS: `${ApiURL.SENS}/sms/v2`,
+        SMS: `${ApiURL.SENS}`,
     },
 
 }
