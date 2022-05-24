@@ -16,3 +16,9 @@ export interface ApiRequest {
     body?: { [key: string]: any }
 }
 
+export interface ApiResponse<T> {
+    isSuccess: boolean
+    errorCode?: string
+    errorMessage?: string
+    data?: T
+}

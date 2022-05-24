@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse, Method } from "axios";
-import { ApiError, ApiErrorCase } from "../errors/api.error";
-import { ApiRequest } from "../interfaces/api.interface";
+import { ApiError, ErrorCases } from "../errors/api.error";
+import { ApiRequest, ApiResponse } from "../interfaces/api.interface";
 
 
 export class ApiClient {
@@ -18,8 +18,33 @@ export class ApiClient {
         })
     }
 
-
-
+    /**
+     * Executing request and wrapping it with ApiClientResponse
+     * 
+     * will return ApiClientResponse if success, with data else with error message
+     * 
+     * @template T - Data type matched with each API's response
+     * @access public
+     * @param apiRequest `ApiRequest` configs for each api service
+     * @returns `Promise<ApiClientResponse<T>>` return Promise response of wrapped with error handling
+     * @memberof ApiClient
+     */
+    public async request<T extends object>(apiRequest: ApiRequest): Promise<ApiResponse<T>> {
+        try {
+            const val = await this.createRequest<T>(apiRequest)
+            return {
+                isSuccess: true,
+                data: val,
+            }
+        } catch (error) {
+            console.log(error)
+            return {
+                isSuccess: false,
+                errorCode: (error instanceof ApiError)? error.get().code : ErrorCases.API.unHandledError.code,
+                errorMessage: (error instanceof ApiError)? error.get().message : ErrorCases.API.unHandledError.message,
+            }
+        }
+    }
     /**
      * Execute request and return Promise with error or response if success
      * 
@@ -40,24 +65,22 @@ export class ApiClient {
                 .catch((error) => {
                     if (axios.isAxiosError(error)) {
                         if (error.response) {
-                            reject(new ApiError(ApiErrorCase.httpStatusCode, error.response.status))
+                            reject(new ApiError(ErrorCases.API.httpError))
                         } else if (error.request) {
-                            reject(new ApiError(ApiErrorCase.noResponseFromServer))
+                            reject(new ApiError(ErrorCases.API.noResponseFromServer))
                         } else {
-                            reject(new ApiError(ApiErrorCase.requestConfigurationError))
+                            reject(new ApiError(ErrorCases.API.requestConfigurationError))
                         }
                     } else if (error instanceof ApiError) {
                         // url validation Error
                         reject(error)
                     } else {
                         // unexpected Error
-                        reject(new ApiError(ApiErrorCase.unexpectedResponse))
+                        reject(new ApiError(ErrorCases.API.unHandledError))
                     }
                 })
         })
     }
-    
-
     /**
      *  Return configured AxiosInstance's request execution
      * 
@@ -70,7 +93,7 @@ export class ApiClient {
     private axiosRequest(apiRequest: ApiRequest): Promise<AxiosResponse> {
         const { path, method, headers, body } = apiRequest
         // url validation
-        if (!this.validateURL(this.client.defaults.baseURL + apiRequest.path)) throw new ApiError(ApiErrorCase.invalidURL)
+        if (!this.validateURL(this.client.defaults.baseURL + apiRequest.path)) throw new ApiError(ErrorCases.API.invalidURL)
         return this.client.request({
             url: path,
             method: method,
