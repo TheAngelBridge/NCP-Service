@@ -1,4 +1,4 @@
-# NCP-Client
+# NCP-Service
 
 An easy-to-use typescript wrapper for [Naver Cloud Platform API](https://api.ncloud-docs.com/docs/en/common-ncpapi). With VersionUps, API wrappers will be added and updates.
 
@@ -30,7 +30,7 @@ An easy-to-use typescript wrapper for [Naver Cloud Platform API](https://api.ncl
 with npm
 
 ~~~bash
-$ npm install ncpclient
+$ npm install ncp-service
 ~~~
 
 
