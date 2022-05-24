@@ -1,6 +1,6 @@
 {
-    "name": "ncpclient",
-    "version": "1.0.0",
+    "name": "@theangelbridge/ncpclient",
+    "version": "0.0.1",
     "description": "easy-to-use Typescript client for Naver Cloud Platform Services",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
