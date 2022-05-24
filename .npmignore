@@ -1,0 +1,11 @@
+src
+coverage
+.vscode
+.travis.yml
+LICENSE
+__test__
+tsconfig.json
+.idea
+.git*
+.DS_Store
+sample_app
