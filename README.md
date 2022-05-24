@@ -30,7 +30,7 @@ An easy-to-use typescript wrapper for [Naver Cloud Platform API](https://api.ncl
 with npm
 
 ~~~bash
-$ npm install ncp-client
+$ npm install ncpclient
 ~~~
 
 
