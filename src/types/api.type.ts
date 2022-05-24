@@ -7,7 +7,7 @@
  * @member accessKey `string` private access key for account
  * @member secretKey `string` private secret key for account
  */
- export type ApiAuthKey = {
+export type ApiAuthKey = {
     accessKey: string
     secretKey: string
 }
@@ -33,8 +33,7 @@ export type SMSserviceAuth = {
  * @member timestamp `string` timestamp
  * @member signature `string` encrypted signature
  */
- export type ApiSignature = {
+export type ApiSignature = {
     timestamp: string
     signature: string
 }
-  
