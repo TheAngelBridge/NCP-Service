@@ -3,7 +3,7 @@ import { ApiRequest, ApiResponse } from "../../../interfaces/api.interface";
 import { BaseUrl } from "../../../shared/baseurl.shared";
 import { PATH } from "../../../shared/path.shared";
 import { ApiAuthKey, SMSserviceAuth } from "../../../types/api.type";
-import { Message, MMS_File, SendMessageRequest, SendMessageResponse } from "../../../types/sms.type";
+import { LookupMessageResponse, LookupResultResponse, Message, MMS_File, SendMessageRequest, SendMessageResponse } from "../../../types/sms.type";
 import { ApiClient } from "../../../utils/api.util";
 import { buildApiSignature } from "../../../utils/helper.util";
 
@@ -88,6 +88,19 @@ export class SMS {
         const apiRequest = this.requestFactory.SendMessage(MessageType.MMS, ContentType.ADVERTISE, to, subject, content)
         return this.client.request<SendMessageResponse>(apiRequest)
     }
+
+
+    // Lookup Methods
+    public async lookupMessageRequest(requestId: string): Promise<ApiResponse<LookupMessageResponse>> {
+        const apiRequest = this.requestFactory.LookupMessageRequest(requestId)
+        return this.client.request<LookupMessageResponse>(apiRequest)
+    }
+    public async lookupMessageResult(messageId: string): Promise<ApiResponse<LookupResultResponse>> {
+        const apiRequest = this.requestFactory.LookupMessageResult(messageId)
+        return this.client.request<LookupResultResponse>(apiRequest)
+    }
+    
+
 
 }
 
@@ -175,5 +188,39 @@ class SMSRequestFactory {
         }
         request.body = body
         return request
+    }
+
+    public LookupMessageRequest(requestId: string): ApiRequest {
+        const path = PATH.SMS.lookupMessage(this.smsAuth.serviceId, requestId)
+        const method: Method = 'GET'
+        const { timestamp, signature } = buildApiSignature(method, path, this.authKey)
+        const headers = {
+            'Content-Type': 'application/json; charset=utf-8',
+            'x-ncp-iam-access-key': this.authKey.accessKey,
+            'x-ncp-apigw-timestamp': timestamp,
+            'x-ncp-apigw-signature-v2': signature,
+        }
+        return {
+            path: path,
+            method: method,
+            headers: headers,
+        }
+    }
+    public LookupMessageResult(messageId: string): ApiRequest {
+
+        const path = PATH.SMS.lookupResult(this.smsAuth.serviceId, messageId)
+        const method: Method = 'GET'
+        const { timestamp, signature } = buildApiSignature(method, path, this.authKey)
+        const headers = {
+            'Content-Type': 'application/json; charset=utf-8',
+            'x-ncp-iam-access-key': this.authKey.accessKey,
+            'x-ncp-apigw-timestamp': timestamp,
+            'x-ncp-apigw-signature-v2': signature,
+        }
+        return {
+            path: path,
+            method: method,
+            headers: headers,
+        }
     }
 }
