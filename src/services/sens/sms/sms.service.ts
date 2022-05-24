@@ -144,6 +144,13 @@ class SMSRequestFactory {
         this.authKey = authKey
         this.smsAuth = smsAuth
     }
+
+    /**
+     * `TimeUtil` for construct send message reserveTime 
+     * 
+     */
+
+
     private buildSendMessageRequest(): ApiRequest {
         const path = PATH.SMS.sendMessage(this.smsAuth.serviceId)
         const method: Method = 'POST'
