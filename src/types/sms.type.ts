@@ -1,4 +1,33 @@
 
+
+export type SendMessageRequest = {
+    type: string
+    from: string,
+    content: string,
+    messages: Message[]
+    // Optional
+    // 
+    subject?: string
+    contentType?: string
+    countryCode?: string
+    // 
+    files?: MMS_File[]
+    //
+    reserveTime?: string
+    reserveTimeZone?: string
+    scheduleCode?: string
+    
+}
+export type Message = {
+    to: string
+    subject?: string
+    content?: string
+}
+export type MMS_File = {
+    name: string
+    body: string
+}
+
 /**
  * `Response` for **Send Messages**
  * 
