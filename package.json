@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "easy-to-use Typescript client for Naver Cloud Platform Services",
     "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "scripts": {
         "test": "jest",
         "build": "tsc",

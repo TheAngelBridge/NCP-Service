@@ -7,16 +7,39 @@ import { LookupMessageResponse, LookupReservedMessageResponse, LookupResultRespo
 import { ApiClient } from "../../../utils/api.util";
 import { buildApiSignature } from "../../../utils/helper.util";
 
+/**
+ * `Message Type` for each message's style
+ * 
+ * SMS, LMS, MMS currently supported - last checked : 2022.05.25
+ * 
+ * @enum `MessageType`
+ */
 enum MessageType {
     SMS = 'SMS',
     LMS = 'LMS',
     MMS = 'MMS',
 }
+/**
+ * `Content Type` for each message's style
+ * 
+ * COMMON, ADVERTISE currently supported - last checked : 2022.05.25
+ * 
+ * @enum `Content Type`
+ */
 enum ContentType {
     COMMON = 'COMM',
     ADVERTISE = 'AD',
 }
 
+/**
+ * `SMS` service provider.
+ * 
+ * It'll provide user separated message request functions. For users, provides separated functions which 
+ * attatched it's purpose. Originally, just 1 api provided from SENS seervice, but this wrapper provides 
+ * autocompleted method styles to decrease developer's mistake.
+ * 
+ * @class
+ */
 export class SMS {
     /**
      * The ApiClient for working with http request
@@ -26,23 +49,14 @@ export class SMS {
      * @memberof SMS
      */
     private client: ApiClient
-    /**
-     * Naver Cloud Platform account access Key for API authentication
-     * 
-     * @access private 
-     * @type `ApiAuthKey`
-     * @memberof SMS
-     */
-    private authKey: ApiAuthKey
-    /**
-     * Registered phoneNumber, serviceId for using SMS API
-     * 
-     * @access private 
-     * @type `SMSserviceAuthType`
-     * @memberof SMS
-     */
-    private smsAuth: SMSserviceAuth
 
+    /**
+     * The RequestFactory for provide SMS api request
+     * 
+     * @access private
+     * @class `SMSRequestFactory`
+     * @memberof SMS
+     */
     private requestFactory: SMSRequestFactory
 
     /**
@@ -56,8 +70,6 @@ export class SMS {
         authKey: ApiAuthKey,
         smsAuth: SMSserviceAuth,
     ) {
-        this.authKey = authKey
-        this.smsAuth = smsAuth
         this.client = new ApiClient(BaseUrl.SENS.SMS)
         this.requestFactory = new SMSRequestFactory(authKey, smsAuth)
     }
@@ -137,19 +149,40 @@ export class SMS {
     }
 }
 
+
+
+/**
+ * `Request Factory` for building SMS api request
+ * 
+ * Original sms api has just `Send Message`, `Lookup Message Request`, `Lookup Messsage Result`, 
+ * `Lookup Reserved Message`, `Cancel Reserved Message`, `Cancel Scheduled Message`. but we separate
+ * each request to specific purpose.
+ * 
+ * It will wrapped by request provider, `SMS`.
+ * 
+ * @class
+ */
 class SMSRequestFactory {
+    /**
+     * Naver Cloud Platform account access Key for API authentication
+     * 
+     * @access private 
+     * @type `ApiAuthKey`
+     * @memberof SMS
+     */
     private authKey: ApiAuthKey
+    /**
+     * Registered phoneNumber, serviceId for using SMS API
+     * 
+     * @access private 
+     * @type `SMSserviceAuthType`
+     * @memberof SMS
+     */
     private smsAuth: SMSserviceAuth
     constructor(authKey: ApiAuthKey, smsAuth: SMSserviceAuth) {
         this.authKey = authKey
         this.smsAuth = smsAuth
     }
-
-    /**
-     * `TimeUtil` for construct send message reserveTime 
-     * 
-     */
-
 
     private buildSendMessageRequest(): ApiRequest {
         const path = PATH.SMS.sendMessage(this.smsAuth.serviceId)
