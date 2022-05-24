@@ -69,14 +69,6 @@ type ApiClientResponse<T> = {
 ~~~
 
 
-    invalidURL: 'API000',
-    requestConfigurationError: 'API001',
-
-    httpError: 'API100',
-    unexpectedResponse: 'API101',
-    noResponseFromServer: 'API102',
-    
-    unHandledError: 'API200'
 
 ## Client Error Types
 
