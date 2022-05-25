@@ -1,6 +1,6 @@
 {
     "name": "ncp-service",
-    "version": "0.0.2",
+    "version": "0.0.2-A",
     "description": "easy-to-use Typescript client for Naver Cloud Platform Services",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
