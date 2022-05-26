@@ -82,12 +82,12 @@ export class SMS {
     }
     public async sendLMS(to: string|string[], subject: string, content: string, isAd: boolean = false): Promise<ApiResponse<SendMessageResponse>> {
         const contentType = (isAd) ? ContentType.ADVERTISE : ContentType.COMMON
-        const apiRequest = this.requestFactory.SendMessage(MessageType.LMS, contentType, to, subject, content)
+        const apiRequest = this.requestFactory.SendMessage(MessageType.LMS, contentType, to, content, subject)
         return this.client.request<SendMessageResponse>(apiRequest)
     }
     public async sendMMS(to: string|string[], subject: string, content: string, isAd: boolean = false): Promise<ApiResponse<SendMessageResponse>> {
         const contentType = (isAd) ? ContentType.ADVERTISE : ContentType.COMMON
-        const apiRequest = this.requestFactory.SendMessage(MessageType.MMS, contentType, to, subject, content)
+        const apiRequest = this.requestFactory.SendMessage(MessageType.MMS, contentType, to, content, subject)
         return this.client.request<SendMessageResponse>(apiRequest)
     }
     // Reserve Message
@@ -98,12 +98,12 @@ export class SMS {
     }
     public async reserveLMS(to: string|string[], subject: string, content: string, reserveTime: string, isAd: boolean = false): Promise<ApiResponse<SendMessageResponse>> {
         const contentType = (isAd) ? ContentType.ADVERTISE : ContentType.COMMON
-        const apiRequest = this.requestFactory.ReserveMessage(MessageType.LMS, contentType, to, subject, content, reserveTime)
+        const apiRequest = this.requestFactory.ReserveMessage(MessageType.LMS, contentType, to, content, subject, reserveTime)
         return this.client.request<SendMessageResponse>(apiRequest)
     }
     public async reserveMMS(to: string|string[], subject: string, content: string, reserveTime: string, isAd: boolean = false): Promise<ApiResponse<SendMessageResponse>> {
         const contentType = (isAd) ? ContentType.ADVERTISE : ContentType.COMMON
-        const apiRequest = this.requestFactory.ReserveMessage(MessageType.MMS, contentType, to, subject, content, reserveTime)
+        const apiRequest = this.requestFactory.ReserveMessage(MessageType.MMS, contentType, to, content, subject, reserveTime)
         return this.client.request<SendMessageResponse>(apiRequest)
     }
     // Schedule Message
@@ -114,12 +114,12 @@ export class SMS {
     }
     public async scheduleLMS(to: string|string[], subject: string, content: string, scheduleCode: string, isAd: boolean = false): Promise<ApiResponse<SendMessageResponse>> {
         const contentType = (isAd) ? ContentType.ADVERTISE : ContentType.COMMON
-        const apiRequest = this.requestFactory.ScheduleMessage(MessageType.LMS, contentType, to, subject, content, scheduleCode)
+        const apiRequest = this.requestFactory.ScheduleMessage(MessageType.LMS, contentType, to, content, subject, scheduleCode)
         return this.client.request<SendMessageResponse>(apiRequest)
     }
     public async scheduleMMS(to: string|string[], subject: string, content: string, scheduleCode: string, isAd: boolean = false): Promise<ApiResponse<SendMessageResponse>> {
         const contentType = (isAd) ? ContentType.ADVERTISE : ContentType.COMMON
-        const apiRequest = this.requestFactory.ScheduleMessage(MessageType.MMS, contentType, to, subject, content, scheduleCode)
+        const apiRequest = this.requestFactory.ScheduleMessage(MessageType.MMS, contentType, to, content, subject, scheduleCode)
         return this.client.request<SendMessageResponse>(apiRequest)
     }
     // Lookup Methods
