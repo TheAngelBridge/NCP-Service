@@ -9,7 +9,7 @@ export class ApiClient {
 
     constructor(
         baseUrl: string,
-        timeout: number = 2000
+        timeout: number = 10000
     ) {
         this.client = axios.create({
             baseURL: baseUrl,
