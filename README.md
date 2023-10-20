@@ -101,6 +101,7 @@ Client Response types preprocessed by NCP Client
 
 - [TheAngelBridge, Inc](https://github.com/TheAngelbridge)
 - [AlenHeo](https://github.com/AlenHeo)
+- [YHRayLee](https://github.com/YHRayLee)
 
 
 
